@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { FontAwesome } from '@expo/vector-icons';
 
 const PrizesScreen = () => {
@@ -11,6 +11,27 @@ const PrizesScreen = () => {
       expirationDate: '2023-12-31',
       available: true,
     },
+    {
+        name: 'Prize 2',
+        photosNeeded: 10,
+        unlocked: false,
+        expirationDate: '2023-12-31',
+        available: true,
+      },
+      {
+        name: 'Prize 2',
+        photosNeeded: 10,
+        unlocked: false,
+        expirationDate: '2023-12-31',
+        available: true,
+      },
+      {
+        name: 'Prize 3',
+        photosNeeded: 10,
+        unlocked: true,
+        expirationDate: '2023-12-31',
+        available: false,
+      },
     {
       name: 'Prize 2',
       photosNeeded: 15,
@@ -44,17 +65,19 @@ const PrizesScreen = () => {
     ));
   };
 
-  return <View style={styles.container}>{renderPrizes()}</View>;
+  return (
+    <View style={styles.container}>
+      <ScrollView>{renderPrizes()}</ScrollView>
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    paddingTop: 20,
   },
   prizeContainer: {
-    width: '80%',
+    width: '100%',
     padding: 16,
     marginBottom: 16,
     backgroundColor: '#fff',
@@ -87,9 +110,3 @@ const styles = StyleSheet.create({
 });
 
 export default PrizesScreen;
-
-
-
-
-
-
