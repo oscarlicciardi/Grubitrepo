@@ -34,7 +34,7 @@ const PrizesScreen = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("localhost:7046/api/prizes/list");
+        const response = await axios.get("https://localhost:7046/prizes/list");
         setPrizes(response.data);
       } catch (error) {
         console.error("Error fetching prize data:", error);
