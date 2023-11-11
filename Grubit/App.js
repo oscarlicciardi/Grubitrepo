@@ -1,5 +1,6 @@
 import React from 'react';
-import AppNavigator from '../Grubit/navigator/AppNavigator';
+//import AppNavigator from '../Grubit/navigator/AppNavigator';
+import AppNavigator from './navigator/AppNavigator';
 
 const App = () => {
   return <AppNavigator />;
