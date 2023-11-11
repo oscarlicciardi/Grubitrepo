@@ -59,7 +59,7 @@ namespace Grubit.api.Controllers
 
         [HttpPost]
         [Route("AddCompany")]
-        public async Task<IActionResult> CreateFrequency([FromBody] string companyName, string street, string city, string zipcode, string country, string? vat, string phone, string email, GeoCoordinates geoCoordinates)
+        public async Task<IActionResult> CreateFrequency(string companyName, string street, string city, string zipcode, string country, string? vat, string phone, string email, GeoCoordinates geoCoordinates)
         {
             Address? address = new Address
             {

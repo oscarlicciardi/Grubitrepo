@@ -21,6 +21,7 @@ namespace Grubit.api
                     options.UseSqlite(Configuration.GetConnectionString("Database"));
                 });
 
+                services.AddSwaggerGen();
                 services.AddScoped<IUserService, UserService>();
                 services.AddScoped<IPrizesService, PrizesService>();
 

@@ -197,16 +197,6 @@
         "build": {
           "buildTransitive/net6.0/_._": {}
         }
-      },
-      "grubit.common/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "compile": {
-          "bin/placeholder/grubit.common.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/grubit.common.dll": {}
-        }
       }
     }
   },
@@ -520,17 +510,11 @@
         "microsoft.extensions.primitives.nuspec",
         "useSharedDesignerContext.txt"
       ]
-    },
-    "grubit.common/1.0.0": {
-      "type": "project",
-      "path": "../grubit.common/grubit.common.csproj",
-      "msbuildProject": "../grubit.common/grubit.common.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
-      "Microsoft.EntityFrameworkCore >= 7.0.13",
-      "grubit.common >= 1.0.0"
+      "Microsoft.EntityFrameworkCore >= 7.0.13"
     ]
   },
   "packageFolders": {
@@ -539,11 +523,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubit-be\\grubit.dac\\grubit.dac.csproj",
+      "projectUniqueName": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubitrepo\\Grubit-be\\grubit.dac\\grubit.dac.csproj",
       "projectName": "grubit.dac",
-      "projectPath": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubit-be\\grubit.dac\\grubit.dac.csproj",
+      "projectPath": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubitrepo\\Grubit-be\\grubit.dac\\grubit.dac.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubit-be\\grubit.dac\\obj\\",
+      "outputPath": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubitrepo\\Grubit-be\\grubit.dac\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -559,11 +543,7 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {
-            "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubit-be\\grubit.common\\grubit.common.csproj": {
-              "projectPath": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubit-be\\grubit.common\\grubit.common.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {

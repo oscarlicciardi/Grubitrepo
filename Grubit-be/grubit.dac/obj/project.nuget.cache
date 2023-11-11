@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ybxRmWSpPj7DJGfELE5wSdUNiH6nv5xP8T1exwDivjP/ot1gu0hdKbLGFIHewgKWJrjXDEPt5lSLE9iZEsGigg==",
+  "dgSpecHash": "zkONeiy1qatE0N8IxT6s9LfQuV7bGgCeolI6P3tSXXGgrkQ+QnHki7zfnarEAyDqQYL0UuIGS2uv5TYMn4z0tQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubit-be\\grubit.dac\\grubit.dac.csproj",
+  "projectFilePath": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubitrepo\\Grubit-be\\grubit.dac\\grubit.dac.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.13\\microsoft.entityframeworkcore.7.0.13.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\7.0.13\\microsoft.entityframeworkcore.abstractions.7.0.13.nupkg.sha512",

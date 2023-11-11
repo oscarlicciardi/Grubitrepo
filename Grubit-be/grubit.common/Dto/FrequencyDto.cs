@@ -1,5 +1,4 @@
-﻿using grubit.dac.entities;
-
+﻿
 namespace grubit.common.Dto
 {
     public  class FrequencyDto

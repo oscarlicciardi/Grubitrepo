@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubit-be\\grubit.common\\grubit.common.csproj",
+      "projectUniqueName": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubitrepo\\Grubit-be\\grubit.common\\grubit.common.csproj",
       "projectName": "grubit.common",
-      "projectPath": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubit-be\\grubit.common\\grubit.common.csproj",
+      "projectPath": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubitrepo\\Grubit-be\\grubit.common\\grubit.common.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubit-be\\grubit.common\\obj\\",
+      "outputPath": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubitrepo\\Grubit-be\\grubit.common\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",

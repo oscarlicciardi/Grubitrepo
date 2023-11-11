@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubit-be\\Grubit\\Grubit.api.csproj": {}
+    "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubitrepo\\Grubit-be\\Grubit\\Grubit.api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubit-be\\grubit-services\\grubit.services.csproj": {
+    "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubitrepo\\Grubit-be\\grubit-services\\grubit.services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubit-be\\grubit-services\\grubit.services.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubitrepo\\Grubit-be\\grubit-services\\grubit.services.csproj",
         "projectName": "grubit.services",
-        "projectPath": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubit-be\\grubit-services\\grubit.services.csproj",
+        "projectPath": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubitrepo\\Grubit-be\\grubit-services\\grubit.services.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubit-be\\grubit-services\\obj\\",
+        "outputPath": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubitrepo\\Grubit-be\\grubit-services\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,11 +28,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubit-be\\grubit.common\\grubit.common.csproj": {
-                "projectPath": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubit-be\\grubit.common\\grubit.common.csproj"
-              },
-              "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubit-be\\grubit.dac\\grubit.dac.csproj": {
-                "projectPath": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubit-be\\grubit.dac\\grubit.dac.csproj"
+              "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubitrepo\\Grubit-be\\grubit.dac\\grubit.dac.csproj": {
+                "projectPath": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubitrepo\\Grubit-be\\grubit.dac\\grubit.dac.csproj"
               }
             }
           }
@@ -69,14 +66,14 @@
         }
       }
     },
-    "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubit-be\\grubit.common\\grubit.common.csproj": {
+    "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubitrepo\\Grubit-be\\grubit.dac\\grubit.dac.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubit-be\\grubit.common\\grubit.common.csproj",
-        "projectName": "grubit.common",
-        "projectPath": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubit-be\\grubit.common\\grubit.common.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubitrepo\\Grubit-be\\grubit.dac\\grubit.dac.csproj",
+        "projectName": "grubit.dac",
+        "projectPath": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubitrepo\\Grubit-be\\grubit.dac\\grubit.dac.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubit-be\\grubit.common\\obj\\",
+        "outputPath": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubitrepo\\Grubit-be\\grubit.dac\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -93,68 +90,6 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {}
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "default"
-        }
-      },
-      "frameworks": {
-        "net8.0": {
-          "targetAlias": "net8.0",
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48",
-            "net481"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100-rc.1.23463.5/PortableRuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubit-be\\grubit.dac\\grubit.dac.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubit-be\\grubit.dac\\grubit.dac.csproj",
-        "projectName": "grubit.dac",
-        "projectPath": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubit-be\\grubit.dac\\grubit.dac.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubit-be\\grubit.dac\\obj\\",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-        ],
-        "originalTargetFrameworks": [
-          "net8.0"
-        ],
-        "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "net8.0": {
-            "targetAlias": "net8.0",
-            "projectReferences": {
-              "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubit-be\\grubit.common\\grubit.common.csproj": {
-                "projectPath": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubit-be\\grubit.common\\grubit.common.csproj"
-              }
-            }
           }
         },
         "warningProperties": {
@@ -195,14 +130,14 @@
         }
       }
     },
-    "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubit-be\\Grubit\\Grubit.api.csproj": {
+    "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubitrepo\\Grubit-be\\Grubit\\Grubit.api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubit-be\\Grubit\\Grubit.api.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubitrepo\\Grubit-be\\Grubit\\Grubit.api.csproj",
         "projectName": "Grubit.api",
-        "projectPath": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubit-be\\Grubit\\Grubit.api.csproj",
+        "projectPath": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubitrepo\\Grubit-be\\Grubit\\Grubit.api.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubit-be\\Grubit\\obj\\",
+        "outputPath": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubitrepo\\Grubit-be\\Grubit\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -219,14 +154,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubit-be\\grubit-services\\grubit.services.csproj": {
-                "projectPath": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubit-be\\grubit-services\\grubit.services.csproj"
+              "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubitrepo\\Grubit-be\\grubit-services\\grubit.services.csproj": {
+                "projectPath": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubitrepo\\Grubit-be\\grubit-services\\grubit.services.csproj"
               },
-              "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubit-be\\grubit.common\\grubit.common.csproj": {
-                "projectPath": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubit-be\\grubit.common\\grubit.common.csproj"
-              },
-              "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubit-be\\grubit.dac\\grubit.dac.csproj": {
-                "projectPath": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubit-be\\grubit.dac\\grubit.dac.csproj"
+              "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubitrepo\\Grubit-be\\grubit.dac\\grubit.dac.csproj": {
+                "projectPath": "C:\\Users\\Admin\\source\\repos\\Grubit\\Grubitrepo\\Grubit-be\\grubit.dac\\grubit.dac.csproj"
               }
             }
           }
@@ -244,21 +176,45 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[12.0.1, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[7.0.13, )"
             },
-            "Microsoft.DotNet.ILCompiler": {
-              "suppressParent": "All",
+            "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[8.0.0-rc.1.23419.4, )",
-              "autoReferenced": true
+              "version": "[7.0.13, )"
             },
-            "Microsoft.NET.ILLink.Tasks": {
-              "suppressParent": "All",
+            "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
-              "version": "[8.0.0-rc.1.23419.4, )",
-              "autoReferenced": true
+              "version": "[7.0.13, )"
+            },
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.Extensions.Hosting": {
+              "target": "Package",
+              "version": "[7.0.1, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.5.0, )"
+            },
+            "Swashbuckle.AspNetCore.Swagger": {
+              "target": "Package",
+              "version": "[6.5.0, )"
+            },
+            "Swashbuckle.AspNetCore.SwaggerUI": {
+              "target": "Package",
+              "version": "[6.5.0, )"
             }
           },
           "imports": [
@@ -272,12 +228,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "runtime.win-x64.Microsoft.DotNet.ILCompiler",
-              "version": "[8.0.0-rc.1.23419.4, 8.0.0-rc.1.23419.4]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"

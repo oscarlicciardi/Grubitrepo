@@ -1,0 +1,6 @@
+C:\Users\Admin\source\repos\Grubit\Grubitrepo\Grubit-be\grubit.common\obj\Debug\net8.0\grubit.common.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\source\repos\Grubit\Grubitrepo\Grubit-be\grubit.common\obj\Debug\net8.0\grubit.common.AssemblyInfoInputs.cache
+C:\Users\Admin\source\repos\Grubit\Grubitrepo\Grubit-be\grubit.common\obj\Debug\net8.0\grubit.common.AssemblyInfo.cs
+C:\Users\Admin\source\repos\Grubit\Grubitrepo\Grubit-be\grubit.common\obj\Debug\net8.0\grubit.common.csproj.CoreCompileInputs.cache
+C:\Users\Admin\source\repos\Grubit\Grubitrepo\Grubit-be\grubit.common\obj\Debug\net8.0\grubit.common.sourcelink.json
+C:\Users\Admin\source\repos\Grubit\Grubitrepo\Grubit-be\grubit.common\obj\Debug\net8.0\grubit.common.csproj.AssemblyReference.cache
