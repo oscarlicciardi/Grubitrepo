@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Grubit.api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+61471a17285811e364e167f386c2b7ac39eab310")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e81345b202fe538f993a8bc830f96707a70f2681")]
 [assembly: System.Reflection.AssemblyProductAttribute("Grubit.api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Grubit.api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -36,6 +36,9 @@ namespace Grubit.api
            
 
                 _context.Users.Add(user);
+                _context.SaveChanges();
+
+                user = _context.Users.Single();
 
                 var prizes = new List<Prize>
                 {

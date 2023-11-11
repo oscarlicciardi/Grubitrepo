@@ -41,8 +41,9 @@ namespace grubit_services
             }
         }
 
-        public Task<Prize[]> GetPrizes(User user)
+        public Task<Prize[]> GetPrizes()
         {
+            var user = _context.Users.Single();
             var prizes = _context.Prizes.Where(p => p.UserId == user.Id).ToArray();
 
             return Task.FromResult(prizes);

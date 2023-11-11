@@ -6,7 +6,7 @@ namespace grubit_services
 {
     public interface IPrizesService
     {
-        Task<Prize[]> GetPrizes(User user);
+        Task<Prize[]> GetPrizes();
         CompanyFrequency CalculateFrequency(Company company);
         double CalculateRate(CompanyFrequency? companyFrequency);
         Task<Prize> UsePrizeAsync(Prize prize, User user);
