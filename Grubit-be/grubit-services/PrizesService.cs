@@ -15,7 +15,7 @@ namespace grubit_services
         }
         public CompanyFrequency CalculateFrequency(Company company)
         {
-            var frequencies = _context.Frequencies.Where(f => f.Company == company).ToArray();
+            var frequencies = _context.Frequencies.Where(f => f.CompanyId == company.Id).ToArray();
             if(frequencies.Length >= 20)
             {
                 return CompanyFrequency.High;
@@ -43,7 +43,7 @@ namespace grubit_services
 
         public Task<Prize[]> GetPrizes(User user)
         {
-            var prizes = _context.Prizes.Where(p => p.User == user).ToArray();
+            var prizes = _context.Prizes.Where(p => p.UserId == user.Id).ToArray();
 
             return Task.FromResult(prizes);
         }

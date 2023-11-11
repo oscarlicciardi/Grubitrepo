@@ -4,12 +4,12 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:11100",
+      "applicationUrl": "http://localhost:44315",
       "sslPort": 44315
     }
   },
   "profiles": {
-    "PokemonReviewApp": {
+    "Grubit": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("grubit.services")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3b305a5a4e8d8a86df4e574c2741da8fa08ed8e7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+61471a17285811e364e167f386c2b7ac39eab310")]
 [assembly: System.Reflection.AssemblyProductAttribute("grubit.services")]
 [assembly: System.Reflection.AssemblyTitleAttribute("grubit.services")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

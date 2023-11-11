@@ -6,7 +6,7 @@ namespace grubit.dac.entities
         public int Id { get; set; }
         public DateTime DateTime { get; set; }
         public GeoCoordinates GeoCoordinates { get; set; }
-        public Company Company { get; set; }
-        public User User { get; set; }
+        public int CompanyId { get; set; }
+        public int UserId { get; set; }
     }
 }

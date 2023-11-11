@@ -59,15 +59,9 @@ namespace Grubit.api.Controllers
 
         [HttpPost]
         [Route("AddCompany")]
-        public async Task<IActionResult> CreateFrequency(string companyName, string street, string city, string zipcode, string country, string? vat, string phone, string email, GeoCoordinates geoCoordinates)
+        public async Task<IActionResult> CreateFrequency(string companyName, string? vat, string phone, string email, GeoCoordinates geoCoordinates)
         {
-            Address? address = new Address
-            {
-                Street = street,
-                City = city,
-                ZipCode = zipcode,
-                Country = country,
-            };
+          
             MainContact contact = new MainContact
             {
                 Phone = phone,
@@ -75,7 +69,7 @@ namespace Grubit.api.Controllers
             };
             DateTime date = DateTime.Now;
 
-            var frequency = _userService.AddFrequency(companyName, address, contact,vat, date, geoCoordinates);
+            var frequency = _userService.AddFrequency(companyName, contact,vat, date, geoCoordinates);
             return Ok(frequency);
         }
     }

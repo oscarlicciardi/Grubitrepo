@@ -28,10 +28,19 @@ namespace grubit.dac
                 .HasKey(u => u.Id);
 
             modelBuilder.Entity<Prize>()
-                .HasKey(p => p.Id);
+                .HasKey(p => p.Code);
 
             modelBuilder.Entity<Frequency>()
                 .HasKey(f => f.Id);
+
+            modelBuilder.Entity<Frequency>()
+                .OwnsOne(f => f.GeoCoordinates);
+
+            modelBuilder.Entity<User>()
+                .OwnsOne(f => f.MainContact);
+
+            modelBuilder.Entity<Company>()
+                .OwnsOne(f => f.Contact);
 
             modelBuilder.Entity<User>()
                 .HasIndex(u => u.UserName) // Unique constraint on the Username attribute
@@ -41,24 +50,7 @@ namespace grubit.dac
                 .HasIndex(c => c.CompanyName) // Unique constraint on the Name attribute
                 .IsUnique();
 
-            modelBuilder.Entity<Prize>()
-                .HasIndex(p => p.Code) // Unique constraint on the Code attribute
-                .IsUnique();
-
-            modelBuilder.Entity<Frequency>()
-                 .HasOne(f => f.Company)
-                 .WithMany()
-                 .HasForeignKey(f => f.Company);
-
-            modelBuilder.Entity<Frequency>()
-                .HasOne(f => f.User)
-                .WithMany()
-                .HasForeignKey(f => f.User);
-
-            modelBuilder.Entity<Prize>()
-                .HasOne(p => p.User)
-                .WithMany()
-                .HasForeignKey(p => p.User);
+  
         }
     }
 }

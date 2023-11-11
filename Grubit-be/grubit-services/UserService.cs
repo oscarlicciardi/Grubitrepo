@@ -3,6 +3,7 @@ using grubit.dac;
 using grubit.dac.entities;
 using grubit.common.Enums;
 using Microsoft.EntityFrameworkCore;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace grubit_services
 {
@@ -17,7 +18,7 @@ namespace grubit_services
             _prizesService = prizesService;
         }
 
-        public Frequency AddFrequency (string companyName, Address? address, MainContact contact, string? vat, DateTime date, GeoCoordinates coordinates)
+        public Frequency AddFrequency (string companyName, MainContact contact, string? vat, DateTime date, GeoCoordinates coordinates)
         {
             Frequency frequency = new Frequency
             {
@@ -28,32 +29,32 @@ namespace grubit_services
             var user = _context.Users.Single();
             if (!companyExists)
             {
-                var company = AddCompany(companyName, address, contact, vat);
-                frequency.Company = company;
-                frequency.User = user;
+                var company = AddCompany(companyName, contact, vat);
+                frequency.CompanyId = company.Id;
 
-              
+                user.TotalPoints = (int)(user.TotalPoints + company.Points); // updated points of user
+
             }
             else
             {
-                frequency.Company = new Company
-                {
-                    CompanyName = companyName,
-                    Address = address,
-                    Contact = contact,
-                    Vat = vat,
-                };
-                frequency.User = user;
+                var companyId = _context.Companies
+                   .Where(c => c.CompanyName == companyName)
+                   .Select(c => c.Id) // Select the Id property
+                   .FirstOrDefault();
+
+                frequency.CompanyId = companyId;
+                var company = _context.Companies.Where(c => c.Id == companyId).FirstOrDefault();
+
+                user.TotalPoints = (int)(user.TotalPoints + company.Points); // updated points of user
             }
             return frequency;   
         }
-        public Company AddCompany(string companyName, Address? address, MainContact contact, string? vat)
+        public Company AddCompany(string companyName, MainContact contact, string? vat)
         {
             
             var company = new Company
             {
                 CompanyName = companyName,
-                Address = address,
                 Contact = contact,
                 Vat = vat,
                 Points = 3
@@ -73,35 +74,6 @@ namespace grubit_services
             return user;
         }
 
-      /*  public async Task<User?> Login(string username, string password)
-        {
-    
-            username = username.ToLower();
-
-            // Retrieve the user from the database by username
-            var user = await _context.Users
-                .Where(u => u.UserName == username)
-                .SingleOrDefaultAsync();
-
-            if (user == null)
-            {
-                return null;
-            }
-
-            bool isPasswordValid = VerifyPassword(password, user.Password);
-
-            if (!isPasswordValid)
-            {
-                
-                return null;
-            }
-
-            return user;
-        }
-
-        private bool VerifyPassword(string inputPassword, string hashedPassword)
-        {
-            return inputPassword == hashedPassword;
-        }*/
+     
     }
 }

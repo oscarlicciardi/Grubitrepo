@@ -76,3 +76,7 @@ C:\Users\Admin\source\repos\Grubit\Grubitrepo\Grubit-be\Grubit\bin\Debug\net8.0\
 C:\Users\Admin\source\repos\Grubit\Grubitrepo\Grubit-be\Grubit\obj\Debug\net8.0\Grubit.api.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Admin\source\repos\Grubit\Grubitrepo\Grubit-be\Grubit\bin\Debug\net8.0\AutoMapper.dll
 C:\Users\Admin\source\repos\Grubit\Grubitrepo\Grubit-be\Grubit\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\Admin\source\repos\Grubit\Grubitrepo\Grubit-be\Grubit\bin\Debug\net8.0\Humanizer.dll
+C:\Users\Admin\source\repos\Grubit\Grubitrepo\Grubit-be\Grubit\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\Admin\source\repos\Grubit\Grubitrepo\Grubit-be\Grubit\bin\Debug\net8.0\Mono.TextTemplating.dll
+C:\Users\Admin\source\repos\Grubit\Grubitrepo\Grubit-be\Grubit\bin\Debug\net8.0\System.CodeDom.dll

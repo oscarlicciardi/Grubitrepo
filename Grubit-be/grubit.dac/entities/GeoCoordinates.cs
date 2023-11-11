@@ -3,7 +3,7 @@ namespace grubit.dac.entities
 {
     public class GeoCoordinates
     {
-        public GeoCoordinates Latitude { get; set; }
-        public GeoCoordinates Longitude { get; set;}
+        public double Latitude { get; set; }
+        public double Longitude { get; set;}
     }
 }
