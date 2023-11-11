@@ -109,7 +109,7 @@ const PrizesScreen = () => {
           <Text style={styles.expirationDate}>Expires: {prize.expirationDate}</Text>
         ) : (
           <>
-            <Text style={styles.photosNeeded}>{prize.photosNeeded} Photos Needed</Text>
+            <Text style={styles.photosNeeded}>{prize.photosNeeded} Points Needed</Text>
             <FontAwesome name="lock" size={24} color="black" />
           </>
         )}
