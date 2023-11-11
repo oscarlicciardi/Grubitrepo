@@ -1,6 +1,7 @@
 ﻿
 using grubit.dac;
 using grubit.dac.entities;
+using grubit.common.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace grubit_services
@@ -8,10 +9,12 @@ namespace grubit_services
     public class UserService : IUserService
     {
         private readonly GrubitDbContext _context;
+        private readonly IPrizesService _prizesService;
 
-        public UserService(GrubitDbContext context)
+        public UserService(GrubitDbContext context, IPrizesService prizesService)
         {
             _context = context;
+            _prizesService = prizesService;
         }
 
         public Frequency AddFrequency (string companyName, Address? address, MainContact contact, string? vat, DateTime date, GeoCoordinates coordinates)
@@ -28,6 +31,7 @@ namespace grubit_services
                 var company = AddCompany(companyName, address, contact, vat);
                 frequency.Company = company;
                 frequency.User = user;
+
               
             }
             else
@@ -45,14 +49,18 @@ namespace grubit_services
         }
         public Company AddCompany(string companyName, Address? address, MainContact contact, string? vat)
         {
-         
+            
             var company = new Company
             {
                 CompanyName = companyName,
                 Address = address,
                 Contact = contact,
-                Vat = vat
+                Vat = vat,
+                Points = 3
             };
+            company.CompanyFrequency = CompanyFrequency.Low;
+            
+
                 _context.Add(company);
             
             return company;

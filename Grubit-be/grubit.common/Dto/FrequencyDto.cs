@@ -1,5 +1,4 @@
-﻿
-using grubit.common.Enums;
+﻿using grubit.dac.entities;
 
 namespace grubit.common.Dto
 {
