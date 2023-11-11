@@ -1,25 +1,43 @@
 import React, { useState } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
-import { FontAwesome5 } from "@expo/vector-icons";
-import LoginScreen from "../screens/LoginScreen";
-import ScanImageScreen from "../screens/ScanImageScreen";
+import Header from "../components/Header";
+import ScanImageScreen from "../screens/ScanImageScreen.js";
 import PrizesScreen from "../screens/PrizesScreen";
 import ProfileScreen from "../screens/ProfileScreen";
+import { FontAwesome5 } from "@expo/vector-icons";
+import LoginScreen from "../screens/LoginScreen";
 
 const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  function handleLogin ()  {
+  function handleLogin() {
     setIsLoggedIn(true);
-  };
+  }
+
+  function handleLogout() {
+    setIsLoggedIn(false);
+  }
+
+  const companyLogoUrl = "../images/logo.png";
 
   return (
     <NavigationContainer>
       {isLoggedIn ? (
-        <Tab.Navigator>
+        <Tab.Navigator
+          screenOptions={{
+            header: () => (
+              <Header
+                handleLogout={handleLogout}
+                userName="Carlos"
+                userSurname="Fafd"
+                companyLogoUrl={companyLogoUrl}
+              />
+            ),
+          }}
+        >
           <Tab.Screen
             name="ScanImage"
             component={ScanImageScreen}
