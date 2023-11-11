@@ -12,7 +12,7 @@ The goal, for Gruber Logistics, is to obtain contact and relevant info about oth
 
 # Technologies used
 
-For the frontend, the project relies on React Native and mainly expo modules. For the backend, C# and ASP.NET are being used. 
+For the frontend, the project relies on React Native and mainly expo modules. For the backend, C#, sqlite and ASP.NET are being used. 
 Development, deployment and testing have been performed using:
 • React 18.2.0;
 • React-native 0.72.6;
@@ -22,6 +22,7 @@ Development, deployment and testing have been performed using:
 • macOS 14.0 (x64);
 • Windows 11 (x86);
 • XCode 15.0.1;
+• Sqlite;
 • VS Code 1.83.1.
 
 
