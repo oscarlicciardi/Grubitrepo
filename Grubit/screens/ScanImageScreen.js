@@ -93,6 +93,7 @@ const ScanImageScreen = () => {
     if (companyNameMatch) {
       companyName = companyNameMatch[1];
     } else {
+      // If there is no explicit "company name" match, consider the first line as the company name
       const firstLine = text.split("\n")[0].trim();
       companyName = firstLine;
     }
@@ -153,6 +154,7 @@ const ScanImageScreen = () => {
         {showForm && (
           <Modal animationType="slide" transparent={false} visible={showForm}>
             <View style={styles.formContainer}>
+             
               <TextInput
                 style={styles.input}
                 placeholder="Company Name"

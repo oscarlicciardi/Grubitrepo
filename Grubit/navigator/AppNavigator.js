@@ -25,14 +25,13 @@ const AppNavigator = () => {
 
   return (
     <NavigationContainer>
-      {isLoggedIn ? (
         <Tab.Navigator
           screenOptions={{
             header: () => (
               <Header
                 handleLogout={handleLogout}
-                userName="Carlos"
-                userSurname="Fafd"
+                userName="Thomas"
+                userSurname="Losch"
                 companyLogoUrl={companyLogoUrl}
               />
             ),
@@ -46,6 +45,7 @@ const AppNavigator = () => {
               tabBarIcon: ({ color, size }) => (
                 <FontAwesome5 name="camera" color={color} size={size} />
               ),
+              unmountOnBlur:true
             }}
           />
           <Tab.Screen
@@ -69,9 +69,7 @@ const AppNavigator = () => {
             }}
           />
         </Tab.Navigator>
-      ) : (
-        <LoginScreen handleLogin={handleLogin} />
-      )}
+      
     </NavigationContainer>
   );
 };

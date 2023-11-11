@@ -2,6 +2,9 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
 const ProfileScreen = () => {
+    const score = 85;
+  const rank = 15;
+  const level = "Intermediate";
   return (
     <View style={styles.container}>
       <View style={styles.profileHeader}>
@@ -20,6 +23,17 @@ const ProfileScreen = () => {
         <Text style={styles.label}>Phone:</Text>
         <Text style={styles.info}>123-456-7890</Text>
       </View>
+
+      <View style={styles.scoringPanel}>
+        <Text style={styles.label}>Score:</Text>
+        <Text style={styles.info}>{score}</Text>
+
+        <Text style={styles.label}>Rank:</Text>
+        <Text style={styles.info}>{rank}</Text>
+
+        <Text style={styles.label}>Level:</Text>
+        <Text style={styles.info}>{level}</Text>
+      </View>
     </View>
   );
 };
@@ -29,6 +43,20 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     backgroundColor: "#f4f4f4",
+  },
+  scoringPanel: {
+    marginTop: 20,
+    backgroundColor: "#fff",
+    padding: 20,
+    borderRadius: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   profileHeader: {
     alignItems: "center",
