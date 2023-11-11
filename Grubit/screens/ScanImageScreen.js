@@ -1,24 +1,39 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, Button, Image } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  Image,
+  TextInput,
+  TouchableOpacity,
+  Modal,
+} from "react-native";
 import { Camera } from "expo-camera";
 import * as Location from "expo-location";
-import { launchCamera, launchImageLibrary } from "react-native-image-picker";
-import RNTextDetector from "rn-text-detector";
+import * as Tesseract from "tesseract.js";
+import { FontAwesome } from "@expo/vector-icons";
 
 const ScanImageScreen = () => {
   const [hasPermission, setHasPermission] = useState(null);
   const [cameraRef, setCameraRef] = useState(null);
   const [location, setLocation] = useState(null);
   const [capturedImage, setCapturedImage] = useState(null);
-  const [textRecognition, setTextRecognition] = useState([]);
+  const [detectedText, setDetectedText] = useState(null);
+  const [formData, setFormData] = useState({
+    companyName: "",
+    email: "",
+    phoneNumber: "",
+  });
+  const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
     (async () => {
-      const { status } = await Camera.requestCameraPermissionsAsync();
+      const { status } = await Camera.requestPermissionsAsync();
       setHasPermission(status === "granted");
 
       if (status === "granted") {
-        const locationStatus = await Location.requestForegroundPermissionsAsync();
+        const locationStatus = await Location.requestPermissionsAsync();
         if (locationStatus.status === "granted") {
           const currentLocation = await Location.getCurrentPositionAsync({});
           setLocation(currentLocation.coords);
@@ -33,78 +48,234 @@ const ScanImageScreen = () => {
       setCapturedImage(uri);
       console.log("Image URI:", uri);
       console.log("Location Coordinates:", location);
-  
-      if (RNTextDetector) {
-        const textRecognitionResult = await RNTextDetector.detectFromUri(uri);
-        setTextRecognition(textRecognitionResult);
-      } else {
-        console.error('RNTextDetector is not available.');
-      }
     }
   };
-  
 
-  if (hasPermission === null) {
-    return <View />;
-  }
-  if (hasPermission === false) {
-    return <Text>No access to camera</Text>;
-  }
+  const handleConfirm = () => {
+    // Perform text detection using Tesseract.js
+    if (capturedImage) {
+      detectTextInImage(capturedImage);
+      setShowForm(true);
+    }
+  };
+
+  const detectTextInImage = async (imageUri) => {
+    try {
+      const {
+        data: { text },
+      } = await Tesseract.recognize(imageUri, "eng", {
+        logger: (info) => console.log(info),
+      });
+
+      setDetectedText(text);
+      console.log("Detected Text:", text);
+
+      // Extract relevant information (company name, email, phone number)
+      extractInformation(text);
+    } catch (error) {
+      console.error("Error during text detection:", error);
+    }
+  };
+
+  const extractInformation = (text) => {
+    const companyNameRegex = /company\s*name\s*:\s*(.*)/i;
+    const emailRegex = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}/;
+    const phoneRegex = /\+\d{1,}|\b\d{3}[-.\s]?\d{3}[-.\s]?\d{4}\b/;
+
+    const companyNameMatch = text.match(companyNameRegex);
+    const emailMatch = text.match(emailRegex);
+    const phoneMatch = text.match(phoneRegex);
+
+    let companyName = "";
+    let email = "";
+    let phoneNumber = "";
+
+    if (companyNameMatch) {
+      companyName = companyNameMatch[1];
+    } else {
+      const firstLine = text.split("\n")[0].trim();
+      companyName = firstLine;
+    }
+
+    if (emailMatch) {
+      email = emailMatch[0];
+    } else if (phoneMatch) {
+      phoneNumber = phoneMatch[0];
+    }
+
+    // Updated setFormData
+    setFormData({
+      companyName,
+      email,
+      phoneNumber,
+    });
+  };
+
+  const handleFormDataChange = (key, value) => {
+    setFormData({
+      ...formData,
+      [key]: value,
+    });
+  };
+
+  const handleSend = () => {
+    // Call your API to send the form data
+    console.log("Form Data:", formData);
+    // Reset the state or navigate to another screen if needed
+    setShowForm(false);
+    setCapturedImage(null);
+    setDetectedText(null);
+    // Add logic to send the data to your API
+  };
+
+  const UserMessage = ({ message, style }) => (
+    <View style={{ alignItems: "center", marginVertical: 10 }}>
+      <Text style={{ color: "#333", ...style }}>{message}</Text>
+    </View>
+  );
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={styles.container}>
       <Camera
-        style={{ flex: 1 }}
+        style={styles.camera}
         type={Camera.Constants.Type.back}
         ref={(ref) => setCameraRef(ref)}
       />
-      <View style={styles.cameraContainer}>
-        <Button title="Take Picture" onPress={handleTakePicture} />
+      <View style={styles.overlay}>
+        <Text style={styles.previewText}>Preview:</Text>
+        {capturedImage && (
+          <UserMessage
+            message="Picture taken successfully!"
+            style={styles.message}
+          />
+        )}
+        <Image source={{ uri: capturedImage }} style={styles.previewImage} />
+        {showForm && (
+          <Modal animationType="slide" transparent={false} visible={showForm}>
+            <View style={styles.formContainer}>
+              <TextInput
+                style={styles.input}
+                placeholder="Company Name"
+                value={formData.companyName}
+                onChangeText={(value) =>
+                  handleFormDataChange("companyName", value)
+                }
+              />
+              <TextInput
+                style={styles.input}
+                placeholder="Email"
+                value={formData.email}
+                onChangeText={(value) => handleFormDataChange("email", value)}
+              />
+              <TextInput
+                style={styles.input}
+                placeholder="Phone Number"
+                value={formData.phoneNumber}
+                onChangeText={(value) =>
+                  handleFormDataChange("phoneNumber", value)
+                }
+              />
+              <TouchableOpacity style={styles.sendButton} onPress={handleSend}>
+                <Text style={styles.buttonText}>Send</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.closeButton}
+                onPress={() => setShowForm(false)}
+              >
+                <Text style={styles.buttonText}>Close</Text>
+              </TouchableOpacity>
+            </View>
+          </Modal>
+        )}
+        {!showForm && (
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity style={styles.button} onPress={handleTakePicture}>
+              <FontAwesome name="camera" size={24} color="white" />
+              <Text style={styles.buttonText}>Take Picture</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={handleConfirm}>
+              <Text style={styles.buttonText}>Confirm</Text>
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
-      {capturedImage && (
-        <View style={styles.previewContainer}>
-          <Text style={styles.previewText}>Preview:</Text>
-          <Image source={{ uri: capturedImage }} style={styles.previewImage} />
-          {!!textRecognition.length &&
-            textRecognition.map((item, i) => (
-              <Text key={i} style={styles.previewText}>
-                {item.text}
-              </Text>
-            ))}
-        </View>
-      )}
     </View>
   );
 };
+
 const styles = StyleSheet.create({
-  cameraContainer: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: "transparent",
-    flexDirection: "row",
-    justifyContent: "center",
-    marginBottom: 20,
+  container: {
+    flex: 1,
   },
-  previewContainer: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: "white",
-    flexDirection: "column",
+  camera: {
+    flex: 1,
+  },
+  overlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "rgba(255, 255, 255, 0.9)",
+    justifyContent: "center",
     alignItems: "center",
-    paddingVertical: 20,
   },
   previewText: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: "bold",
+    marginBottom: 15,
+    color: "#333",
   },
   previewImage: {
-    width: 200,
-    height: 200,
-    marginTop: 10,
+    width: 250,
+    height: 250,
+    marginTop: 15,
+    borderRadius: 10,
+  },
+  input: {
+    height: 40,
+    borderColor: "#B0B0B0",
+    borderWidth: 1,
+    marginBottom: 15,
+    paddingHorizontal: 15,
+    borderRadius: 5,
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    marginTop: 20,
+  },
+  button: {
+    backgroundColor: "#3498db",
+    padding: 15,
+    borderRadius: 8,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  sendButton: {
+    backgroundColor: "#27ae60",
+    padding: 15,
+    borderRadius: 8,
+    marginTop: 15,
+  },
+  closeButton: {
+    backgroundColor: "#e74c3c",
+    padding: 15,
+    borderRadius: 8,
+    marginTop: 15,
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 18,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginLeft: 10,
+  },
+  formContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#F5F5F5",
+  },
+  message: {
+    fontSize: 16,
+    fontStyle: "italic",
   },
 });
 

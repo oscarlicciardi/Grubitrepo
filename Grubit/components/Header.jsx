@@ -1,14 +1,13 @@
 import React from "react";
-import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 
-const Header = ({ handleLogout, userName, userSurname, companyLogoUrl }) => {
+const Header = ({ handleLogout, userName, userSurname }) => {
   return (
     <View style={styles.headerContainer}>
-      <Image source={require("../images/logo.png")} style={styles.logo} />
       <View style={styles.userInfo}>
-        <Text style={styles.userName}>{userName}</Text>
-        <Text style={styles.userSurname}>{userSurname}</Text>
+        <Text style={styles.welcomeText}>Welcome back,</Text>
+        <Text style={styles.userName}>{userName} {userSurname}</Text>
       </View>
       <TouchableOpacity onPress={handleLogout} style={styles.logoutButton}>
         <FontAwesome5 name="sign-out-alt" size={24} color="#ffffff" />
@@ -23,33 +22,28 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     padding: 20,
-    backgroundColor: "#007BFF", // Updated background color
-    elevation: 5, // Increased elevation for a stronger shadow effect
+    backgroundColor: "#007BFF",
+    elevation: 5,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
   },
-  logo: {
-    width: 40,
-    height: 40,
-    resizeMode: "contain",
-  },
   userInfo: {
-    marginLeft: 15,
+    flex: 1,
+  },
+  welcomeText: {
+    fontSize: 16,
+    color: "#ffffff",
   },
   userName: {
-    fontSize: 18, // Increased font size
+    fontSize: 18,
     fontWeight: "bold",
-    color: "#ffffff", // Text color
-  },
-  userSurname: {
-    fontSize: 16, // Increased font size
-    color: "#ffffff", // Text color
+    color: "#ffffff",
   },
   logoutButton: {
-    padding: 10, // Increased padding
-    borderRadius: 10, // Increased border radius
-    backgroundColor: "#0056b3", // Updated button color
+    padding: 10,
+    borderRadius: 10,
+    backgroundColor: "#0056b3",
   },
 });
 
