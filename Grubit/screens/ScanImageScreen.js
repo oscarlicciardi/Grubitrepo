@@ -3,7 +3,6 @@ import {
   View,
   Text,
   StyleSheet,
-  Button,
   Image,
   TextInput,
   TouchableOpacity,
@@ -13,6 +12,7 @@ import { Camera } from "expo-camera";
 import * as Location from "expo-location";
 import * as Tesseract from "tesseract.js";
 import { FontAwesome } from "@expo/vector-icons";
+import { Accelerometer } from "expo-sensors";
 
 const ScanImageScreen = () => {
   const [hasPermission, setHasPermission] = useState(null);
@@ -26,6 +26,7 @@ const ScanImageScreen = () => {
     phoneNumber: "",
   });
   const [showForm, setShowForm] = useState(false);
+  const [isMoving, setIsMoving] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -39,7 +40,27 @@ const ScanImageScreen = () => {
           setLocation(currentLocation.coords);
         }
       }
+
+      // Check accelerometer permissions
+      const accelerometerPermission = await Accelerometer.isAvailableAsync();
+      if (accelerometerPermission) {
+        Accelerometer.setUpdateInterval(1000); // Set update interval to 1 second
+        Accelerometer.addListener((accelerometerData) => {
+          // Check if the device is moving based on acceleration values
+          const acceleration = Math.sqrt(
+            accelerometerData.x ** 2 +
+              accelerometerData.y ** 2 +
+              accelerometerData.z ** 2
+          );
+          setIsMoving(acceleration > 1); // Adjust the threshold as needed
+        });
+      }
     })();
+
+    return () => {
+      // Clean up accelerometer listener on component unmount
+      Accelerometer.removeAllListeners();
+    };
   }, []);
 
   const handleTakePicture = async () => {
@@ -52,6 +73,12 @@ const ScanImageScreen = () => {
   };
 
   const handleConfirm = () => {
+    // Check if the device is moving before proceeding
+    if (isMoving) {
+      console.log("Device is moving, cannot proceed.");
+      return;
+    }
+
     // Perform text detection using Tesseract.js
     if (capturedImage) {
       detectTextInImage(capturedImage);
@@ -154,7 +181,6 @@ const ScanImageScreen = () => {
         {showForm && (
           <Modal animationType="slide" transparent={false} visible={showForm}>
             <View style={styles.formContainer}>
-             
               <TextInput
                 style={styles.input}
                 placeholder="Company Name"
