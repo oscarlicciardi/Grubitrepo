@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -9,69 +9,40 @@ import {
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import QRCode from "react-native-qrcode-svg";
+import colors from "../colors";
 
 const PrizesScreen = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedPrize, setSelectedPrize] = useState(null);
+  const [prizes, setPrizes] = useState(null);
 
-  const prizes = [
-    {
-      name: "Prize 1",
-      photosNeeded: 10,
-      unlocked: true,
-      expirationDate: "2023-12-31",
-      available: true,
-    },
-    {
-      name: "Prize 2",
-      photosNeeded: 10,
-      unlocked: false,
-      expirationDate: "2023-12-31",
-      available: true,
-    },
-    {
-      name: "Prize 3",
-      photosNeeded: 10,
-      unlocked: true,
-      expirationDate: "2023-12-31",
-      available: true,
-    },
-    {
-      name: "Prize 4",
-      photosNeeded: 10,
-      unlocked: true,
-      expirationDate: "2023-12-31",
-      available: true,
-    },
-    {
-      name: "Prize 5",
-      photosNeeded: 15,
-      unlocked: false,
-      expirationDate: "2024-01-15",
-      available: false,
-    },
-    {
-      name: "Prize 6",
-      photosNeeded: 20,
-      unlocked: false,
-      expirationDate: null,
-      available: true,
-    },
-  ];
-
+ 
   const handleCloseModal = () => {
     setModalVisible(false);
     setSelectedPrize(null);
   };
 
   const handlePrizePress = (prize) => {
-    if (prize.unlocked && prize.available) {
+    if (prize.Status!="NotAvailable") {
       setSelectedPrize(prize);
       setModalVisible(true);
     } else {
       setModalVisible(false);
     }
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("localhost:7046/api/prizes/list");
+        setPrizes(response.data);
+      } catch (error) {
+        console.error("Error fetching prize data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const renderVoucherModal = () => {
     if (!selectedPrize) {
@@ -84,11 +55,11 @@ const PrizesScreen = () => {
           <View style={styles.modalContent}>
             <Text style={styles.modalTitle}>Voucher</Text>
             <TouchableOpacity onPress={handleCloseModal} style={styles.closeButton}>
-              <FontAwesome name="close" size={24} color="black" />
+              <FontAwesome name="close" size={24} color= {colors.darkGreen} />
             </TouchableOpacity>
             <QRCode value="YourRandomQRCodeData" size={150} />
             <Text style={styles.modalSubtitle}>
-              Scan this QR code to redeem your prize.
+              Scan this QR code to redeem your prize or say {prizes.code} to the cashier
             </Text>
           </View>
         </View>
@@ -100,23 +71,33 @@ const PrizesScreen = () => {
     return prizes.map((prize, index) => (
       <TouchableOpacity
         key={index}
-        style={styles.prizeContainer}
+        style={[
+          styles.prizeContainer,
+          prize.Status = "NotAvailable" && styles.notAvailableContainer, 
+        ]}
         onPress={() => handlePrizePress(prize)}
       >
-        {!prize.available && <Text style={styles.notAvailableLabel}>NOT AVAILABLE</Text>}
-        <Text style={styles.prizeName}>{prize.name}</Text>
-        {prize.unlocked ? (
-          <Text style={styles.expirationDate}>Expires: {prize.expirationDate}</Text>
-        ) : (
+        <Text style={[styles.prizeName, !prize.available && { color: colors.white }]}>
+          {prize.name}
+        </Text>
+        {prize.Status != "NotAvailable" && (
           <>
-            <Text style={styles.photosNeeded}>{prize.photosNeeded} Points Needed</Text>
-            <FontAwesome name="lock" size={24} color="black" />
+            <Text
+              style={[
+                styles.photosNeeded,
+                prize.Status == "NotAvailable" && { color: colors.white }, 
+              ]}
+            >
+              {prize.pointsNeeded} Points Needed
+            </Text>
+            <FontAwesome name="lock" size={24} color={colors.white} />
           </>
         )}
       </TouchableOpacity>
     ));
   };
 
+  // Render the component
   return (
     <View style={styles.container}>
       <ScrollView>{renderPrizes()}</ScrollView>
@@ -124,7 +105,6 @@ const PrizesScreen = () => {
     </View>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     paddingTop: 20,
@@ -133,64 +113,60 @@ const styles = StyleSheet.create({
     width: "100%",
     padding: 16,
     marginBottom: 16,
-    backgroundColor: "#fff",
+    backgroundColor: colors.white, 
     borderRadius: 8,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 4,
     elevation: 2,
+    alignItems: 'center',     
+    justifyContent: 'center',
+  },
+  notAvailableContainer: {
+    backgroundColor: colors.green, 
+  },
+  notAvailableOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 8,
   },
   notAvailableLabel: {
-    alignSelf: "flex-end",
     fontSize: 12,
-    color: "red",
     marginBottom: 8,
-  },
-  prizeName: {
-    fontSize: 18,
-    fontWeight: "bold",
-    marginBottom: 8,
-  },
-  photosNeeded: {
-    fontSize: 14,
-    marginBottom: 8,
-  },
-  expirationDate: {
-    fontSize: 14,
-    marginBottom: 8,
+    
   },
   modalContainer: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   modalContent: {
-    width: "80%",
-    backgroundColor: "#fff",
+    backgroundColor: 'white',
     padding: 20,
-    borderRadius: 8,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
-    elevation: 5,
+    borderRadius: 10,
+    width: '80%',
   },
   modalTitle: {
-    fontSize: 24,
-    fontWeight: "bold",
+    fontSize: 20,
+    fontWeight: 'bold',
     marginBottom: 10,
-  },
-  modalSubtitle: {
-    fontSize: 16,
-    textAlign: "center",
-    marginTop: 10,
+    textAlign: 'center',
   },
   closeButton: {
-    position: "absolute",
+    position: 'absolute',
     top: 10,
     right: 10,
+  },
+  modalSubtitle: {
+    marginTop: 15,
+    textAlign: 'center',
   },
 });
 

@@ -1,17 +1,14 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
-
+import colors from "../colors";
 const Header = ({ handleLogout, userName, userSurname }) => {
   return (
     <View style={styles.headerContainer}>
       <View style={styles.userInfo}>
-        <Text style={styles.welcomeText}>Welcome back,</Text>
+        <Text style={styles.welcomeText}>Hi,</Text>
         <Text style={styles.userName}>{userName} {userSurname}</Text>
       </View>
-      <TouchableOpacity onPress={handleLogout} style={styles.logoutButton}>
-        <FontAwesome5 name="sign-out-alt" size={24} color="#ffffff" />
-      </TouchableOpacity>
     </View>
   );
 };
@@ -22,7 +19,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     padding: 20,
-    backgroundColor: "#007BFF",
+    backgroundColor: colors.green,
     elevation: 5,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 4 },
@@ -36,7 +33,7 @@ const styles = StyleSheet.create({
     color: "#ffffff",
   },
   userName: {
-    fontSize: 18,
+    fontSize: 24,
     fontWeight: "bold",
     color: "#ffffff",
   },

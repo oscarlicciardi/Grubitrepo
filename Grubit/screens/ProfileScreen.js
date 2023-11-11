@@ -1,39 +1,51 @@
-import React from "react";
+import React, {useEffect,useState} from "react";
 import { View, Text, StyleSheet } from "react-native";
+import colors from "../colors";
 
 const ProfileScreen = () => {
-    const score = 85;
+  const score = 85;
   const rank = 15;
   const level = "Intermediate";
+  const [profile, setProfile] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("localhost:7046/api/User/profile");
+        setProfile(response.data); 
+      } catch (error) {
+        console.error("Error fetching prize data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
   return (
     <View style={styles.container}>
       <View style={styles.profileHeader}>
         <Text style={styles.headerText}>Profile</Text>
       </View>
-      <View style={styles.profileInfo}>
-        <Text style={styles.label}>Name:</Text>
-        <Text style={styles.info}>John</Text>
-
-        <Text style={styles.label}>Surname:</Text>
-        <Text style={styles.info}>Doe</Text>
-
-        <Text style={styles.label}>Email:</Text>
-        <Text style={styles.info}>john.doe@example.com</Text>
-
-        <Text style={styles.label}>Phone:</Text>
-        <Text style={styles.info}>123-456-7890</Text>
-      </View>
 
       <View style={styles.scoringPanel}>
         <Text style={styles.label}>Score:</Text>
-        <Text style={styles.info}>{score}</Text>
-
-        <Text style={styles.label}>Rank:</Text>
-        <Text style={styles.info}>{rank}</Text>
-
-        <Text style={styles.label}>Level:</Text>
-        <Text style={styles.info}>{level}</Text>
+        <Text style={styles.info1}>{profile.score}</Text>
       </View>
+
+      <View style={styles.profileInfo}>
+        <Text style={styles.label}>Name:</Text>
+        <Text style={styles.info}>{profile.name}</Text>
+
+        <Text style={styles.label}>Surname:</Text>
+        <Text style={styles.info}>{profile.surname}</Text>
+
+        <Text style={styles.label}>Email:</Text>
+        <Text style={styles.info}>{profile.email}</Text>
+
+        <Text style={styles.label}>Phone:</Text>
+        <Text style={styles.info}>{profile.phone}</Text>
+      </View>
+
+      
     </View>
   );
 };
@@ -45,7 +57,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#f4f4f4",
   },
   scoringPanel: {
-    marginTop: 20,
+    marginBottom: 20,
     backgroundColor: "#fff",
     padding: 20,
     borderRadius: 10,
@@ -54,6 +66,9 @@ const styles = StyleSheet.create({
       width: 0,
       height: 2,
     },
+    flexDirection: 'column',  
+    alignItems: 'center',     
+    justifyContent: 'center',
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
@@ -64,6 +79,7 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: 24,
+    color: colors.darkGreen,
     fontWeight: "bold",
   },
   profileInfo: {
@@ -83,10 +99,20 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
     marginBottom: 5,
+    color: colors.darkGreen,
+
   },
   info: {
     fontSize: 18,
     marginBottom: 15,
+    color: colors.green,
+  },
+  info1: {
+    fontSize: 42,
+    marginBottom: 15,
+    fontWeight : "bold",
+    color: colors.green,
+
   },
 });
 

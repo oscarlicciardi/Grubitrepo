@@ -13,6 +13,7 @@ import * as Location from "expo-location";
 import * as Tesseract from "tesseract.js";
 import { FontAwesome } from "@expo/vector-icons";
 import { Accelerometer } from "expo-sensors";
+import colors from "../colors";
 
 const ScanImageScreen = () => {
   const [hasPermission, setHasPermission] = useState(null);
@@ -29,7 +30,7 @@ const ScanImageScreen = () => {
   const [isMoving, setIsMoving] = useState(false);
 
   useEffect(() => {
-    (async () => {
+    const setupPermissionsAndListeners = async () => {
       const { status } = await Camera.requestPermissionsAsync();
       setHasPermission(status === "granted");
 
@@ -41,24 +42,25 @@ const ScanImageScreen = () => {
         }
       }
 
-      // Check accelerometer permissions
       const accelerometerPermission = await Accelerometer.isAvailableAsync();
       if (accelerometerPermission) {
-        Accelerometer.setUpdateInterval(1000); // Set update interval to 1 second
-        Accelerometer.addListener((accelerometerData) => {
-          // Check if the device is moving based on acceleration values
-          const acceleration = Math.sqrt(
-            accelerometerData.x ** 2 +
-              accelerometerData.y ** 2 +
-              accelerometerData.z ** 2
-          );
-          setIsMoving(acceleration > 1); // Adjust the threshold as needed
-        });
+        Accelerometer.setUpdateInterval(1000);
+        Accelerometer.addListener(handleAccelerometerChange);
       }
-    })();
+    };
+
+    const handleAccelerometerChange = (accelerometerData) => {
+      const acceleration = Math.sqrt(
+        accelerometerData.x ** 2 +
+          accelerometerData.y ** 2 +
+          accelerometerData.z ** 2
+      );
+      setIsMoving(acceleration > 1);
+    };
+
+    setupPermissionsAndListeners();
 
     return () => {
-      // Clean up accelerometer listener on component unmount
       Accelerometer.removeAllListeners();
     };
   }, []);
@@ -73,13 +75,10 @@ const ScanImageScreen = () => {
   };
 
   const handleConfirm = () => {
-    // Check if the device is moving before proceeding
     if (isMoving) {
       console.log("Device is moving, cannot proceed.");
       return;
     }
-
-    // Perform text detection using Tesseract.js
     if (capturedImage) {
       detectTextInImage(capturedImage);
       setShowForm(true);
@@ -97,7 +96,6 @@ const ScanImageScreen = () => {
       setDetectedText(text);
       console.log("Detected Text:", text);
 
-      // Extract relevant information (company name, email, phone number)
       extractInformation(text);
     } catch (error) {
       console.error("Error during text detection:", error);
@@ -120,7 +118,6 @@ const ScanImageScreen = () => {
     if (companyNameMatch) {
       companyName = companyNameMatch[1];
     } else {
-      // If there is no explicit "company name" match, consider the first line as the company name
       const firstLine = text.split("\n")[0].trim();
       companyName = firstLine;
     }
@@ -130,8 +127,6 @@ const ScanImageScreen = () => {
     } else if (phoneMatch) {
       phoneNumber = phoneMatch[0];
     }
-
-    // Updated setFormData
     setFormData({
       companyName,
       email,
@@ -146,19 +141,26 @@ const ScanImageScreen = () => {
     });
   };
 
-  const handleSend = () => {
-    // Call your API to send the form data
-    console.log("Form Data:", formData);
-    // Reset the state or navigate to another screen if needed
+  const handleSend = async () => {
     setShowForm(false);
     setCapturedImage(null);
     setDetectedText(null);
-    // Add logic to send the data to your API
+    await handleFormSubmit();
+  };
+
+  const handleFormSubmit = async () => {
+    try {
+      const apiUrl = `http://localhost:70076/User/AddCompany?companyName=${formData.companyName}&email=${formData.email}&phoneNumber=${formData.phoneNumber}&longitude=${location.longitude}&latitude=${location.latitude}`;
+      const response = await axios.post(apiUrl);
+      console.log("Post request successful:", response.data);
+    } catch (error) {
+      console.error("Error making post request:", error);
+    }
   };
 
   const UserMessage = ({ message, style }) => (
-    <View style={{ alignItems: "center", marginVertical: 10 }}>
-      <Text style={{ color: "#333", ...style }}>{message}</Text>
+    <View style={styles.messageContainer}>
+      <Text style={[styles.messageText, style]}>{message}</Text>
     </View>
   );
 
@@ -170,14 +172,19 @@ const ScanImageScreen = () => {
         ref={(ref) => setCameraRef(ref)}
       />
       <View style={styles.overlay}>
-        <Text style={styles.previewText}>Preview:</Text>
         {capturedImage && (
-          <UserMessage
-            message="Picture taken successfully!"
-            style={styles.message}
-          />
+          <>
+            <Text style={styles.previewText}>Preview:</Text>
+            <UserMessage
+              message="Picture taken successfully!"
+              style={styles.message}
+            />
+            <Image
+              source={{ uri: capturedImage }}
+              style={styles.previewImage}
+            />
+          </>
         )}
-        <Image source={{ uri: capturedImage }} style={styles.previewImage} />
         {showForm && (
           <Modal animationType="slide" transparent={false} visible={showForm}>
             <View style={styles.formContainer}>
@@ -221,9 +228,11 @@ const ScanImageScreen = () => {
               <FontAwesome name="camera" size={24} color="white" />
               <Text style={styles.buttonText}>Take Picture</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={handleConfirm}>
-              <Text style={styles.buttonText}>Confirm</Text>
-            </TouchableOpacity>
+            {capturedImage && (
+              <TouchableOpacity style={styles.button} onPress={handleConfirm}>
+                <Text style={styles.buttonText}>Confirm</Text>
+              </TouchableOpacity>
+            )}
           </View>
         )}
       </View>
@@ -270,7 +279,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   button: {
-    backgroundColor: "#3498db",
+    backgroundColor: colors.green,
     padding: 15,
     borderRadius: 8,
     flexDirection: "row",
@@ -301,9 +310,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#F5F5F5",
   },
-  message: {
-    fontSize: 16,
-    fontStyle: "italic",
+  messageContainer: {
+    alignItems: "center",
+    marginVertical: 10,
+  },
+  messageText: {
+    color: "#333",
   },
 });
 

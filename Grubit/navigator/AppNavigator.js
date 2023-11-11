@@ -6,8 +6,7 @@ import ScanImageScreen from "../screens/ScanImageScreen.js";
 import PrizesScreen from "../screens/PrizesScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import { FontAwesome5 } from "@expo/vector-icons";
-import LoginScreen from "../screens/LoginScreen";
-
+import colors from "../colors";
 const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => {
@@ -25,51 +24,56 @@ const AppNavigator = () => {
 
   return (
     <NavigationContainer>
-        <Tab.Navigator
-          screenOptions={{
-            header: () => (
-              <Header
-                handleLogout={handleLogout}
-                userName="Thomas"
-                userSurname="Losch"
-                companyLogoUrl={companyLogoUrl}
-              />
+      <Tab.Navigator
+        screenOptions={{
+          header: () => (
+            <Header
+              handleLogout={handleLogout}
+              userName="Thomas"
+              userSurname="Losch"
+              companyLogoUrl={companyLogoUrl}
+            />
+          ),
+          tabBarLabelStyle: {
+            color: colors.green, 
+          },
+        }}
+      >
+        <Tab.Screen
+          name="ScanImage"
+          color={colors.green}
+          component={ScanImageScreen}
+          options={{
+            tabBarLabel: "Scan Image",
+            tabBarIcon: ({ color, size }) => (
+              <FontAwesome5 name="camera" color={colors.green} size={size} />
+            ),
+            unmountOnBlur: true,
+          }}
+        />
+        <Tab.Screen
+          name="Prizes"
+          color={colors.green}
+          component={PrizesScreen}
+          options={{
+            tabBarLabel: "Prizes",
+            tabBarIcon: ({ color, size }) => (
+              <FontAwesome5 name="gift" color={colors.green} size={size} />
             ),
           }}
-        >
-          <Tab.Screen
-            name="ScanImage"
-            component={ScanImageScreen}
-            options={{
-              tabBarLabel: "Scan Image",
-              tabBarIcon: ({ color, size }) => (
-                <FontAwesome5 name="camera" color={color} size={size} />
-              ),
-              unmountOnBlur:true
-            }}
-          />
-          <Tab.Screen
-            name="Prizes"
-            component={PrizesScreen}
-            options={{
-              tabBarLabel: "Prizes",
-              tabBarIcon: ({ color, size }) => (
-                <FontAwesome5 name="gift" color={color} size={size} />
-              ),
-            }}
-          />
-          <Tab.Screen
-            name="Profile"
-            component={ProfileScreen}
-            options={{
-              tabBarLabel: "Profile",
-              tabBarIcon: ({ color, size }) => (
-                <FontAwesome5 name="user" color={color} size={size} />
-              ),
-            }}
-          />
-        </Tab.Navigator>
-      
+        />
+        <Tab.Screen
+          name="Profile"
+          color={colors.green}
+          component={ProfileScreen}
+          options={{
+            tabBarLabel: "Profile",
+            tabBarIcon: ({ size }) => (
+              <FontAwesome5 name="user" color={colors.green} size={size} />
+            ),
+          }}
+        />
+      </Tab.Navigator>
     </NavigationContainer>
   );
 };
