@@ -1,0 +1,16 @@
+C:\Users\Admin\source\repos\Grubit\Grubitrepo\Grubit-be\grubit-services\obj\Debug\net8.0\grubit.services.csproj.AssemblyReference.cache
+C:\Users\Admin\source\repos\Grubit\Grubitrepo\Grubit-be\grubit-services\obj\Debug\net8.0\grubit.services.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\source\repos\Grubit\Grubitrepo\Grubit-be\grubit-services\obj\Debug\net8.0\grubit.services.AssemblyInfoInputs.cache
+C:\Users\Admin\source\repos\Grubit\Grubitrepo\Grubit-be\grubit-services\obj\Debug\net8.0\grubit.services.AssemblyInfo.cs
+C:\Users\Admin\source\repos\Grubit\Grubitrepo\Grubit-be\grubit-services\obj\Debug\net8.0\grubit.services.csproj.CoreCompileInputs.cache
+C:\Users\Admin\source\repos\Grubit\Grubitrepo\Grubit-be\grubit-services\obj\Debug\net8.0\grubit.services.sourcelink.json
+C:\Users\Admin\source\repos\Grubit\Grubitrepo\Grubit-be\grubit-services\bin\Debug\net8.0\grubit.services.deps.json
+C:\Users\Admin\source\repos\Grubit\Grubitrepo\Grubit-be\grubit-services\bin\Debug\net8.0\grubit.services.dll
+C:\Users\Admin\source\repos\Grubit\Grubitrepo\Grubit-be\grubit-services\bin\Debug\net8.0\grubit.services.pdb
+C:\Users\Admin\source\repos\Grubit\Grubitrepo\Grubit-be\grubit-services\bin\Debug\net8.0\grubit.dac.dll
+C:\Users\Admin\source\repos\Grubit\Grubitrepo\Grubit-be\grubit-services\bin\Debug\net8.0\grubit.dac.pdb
+C:\Users\Admin\source\repos\Grubit\Grubitrepo\Grubit-be\grubit-services\obj\Debug\net8.0\grubit.services.csproj.CopyComplete
+C:\Users\Admin\source\repos\Grubit\Grubitrepo\Grubit-be\grubit-services\obj\Debug\net8.0\grubit.services.dll
+C:\Users\Admin\source\repos\Grubit\Grubitrepo\Grubit-be\grubit-services\obj\Debug\net8.0\refint\grubit.services.dll
+C:\Users\Admin\source\repos\Grubit\Grubitrepo\Grubit-be\grubit-services\obj\Debug\net8.0\grubit.services.pdb
+C:\Users\Admin\source\repos\Grubit\Grubitrepo\Grubit-be\grubit-services\obj\Debug\net8.0\ref\grubit.services.dll
